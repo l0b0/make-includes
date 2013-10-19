@@ -6,7 +6,7 @@ python-lint: python-pep8 python-pychecker python-pylint python-pyflakes
 
 .PHONY: python-pep8
 python-pep8:
-	$(FIND) . -type f -name '*.py' -exec pep8 {} +
+	$(FIND) . -type f -name '*.py' -exec pep8 --max-line-length 120 {} +
 
 .PHONY: python-pychecker
 python-pychecker:
