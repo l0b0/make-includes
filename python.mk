@@ -5,7 +5,7 @@ METHOD = find
 method_find := /usr/bin/find . -type f -name '*.py' -exec printf '%s\0' {} +
 method_git := git ls-files -z '*.py'
 
-find = $(method_$(METHOD))
+python_files_run = $(method_$(METHOD)) | xargs -0
 
 # Check Python code for all sorts of lint
 .PHONY: python-lint
@@ -13,16 +13,16 @@ python-lint: python-pep8 python-pychecker python-pylint python-pyflakes
 
 .PHONY: python-pep8
 python-pep8:
-	$(find) | xargs -0 pep8 --max-line-length 120
+	$(python_files_run) pep8 --max-line-length 120
 
 .PHONY: python-pychecker
 python-pychecker:
-	$(find) | xargs -0 pychecker
+	$(python_files_run) pychecker
 
 .PHONY: python-pylint
 python-pylint:
-	$(find) | xargs -0 pylint
+	$(python_files_run) pylint
 
 .PHONY: python-pyflakes
 python-pyflakes:
-	$(find) | xargs -0 pyflakes
+	$(python_files_run) pyflakes
