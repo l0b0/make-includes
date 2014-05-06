@@ -8,6 +8,13 @@ Test
 
     make test
 
-If you want to test a specific Python version, you can run it like this:
+Overrides
+---------
 
-    make PYTHON_VERSION=2.7 test
+- `python` version:
+
+        make PYTHON_VERSION='2.7' test
+        make PYTHON_VERSION='2.7' virtualenv
+- `pep8` options:
+
+        make PEP8_OPTIONS='--max-line-length=120' python-pep8
