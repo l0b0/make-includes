@@ -1,7 +1,11 @@
 PYTHON_VERSION=$(shell python --version | cut -d ' ' -f 2 | cut -d '.' -f 1-2)
 
 .PHONY: test
-test: test-python test-variables
+test: test-posix-shell test-python test-variables
+
+.PHONY: test-posix-shell
+test-posix-shell:
+	make posix-shell-test-syntax
 
 .PHONY: test-python
 test-python: test-python-lint test-python-virtualenv
