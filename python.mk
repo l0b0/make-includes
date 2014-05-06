@@ -6,13 +6,15 @@ else ifeq ($(METHOD),find)
 	python_files_run = /usr/bin/find . -type f -name '*.py' -exec printf '%s\0' {} + | xargs -0
 endif
 
+PEP8_OPTIONS = --max-line-length 120
+
 # Check Python code for all sorts of lint
 .PHONY: python-lint
 python-lint: python-pep8 python-pychecker python-pylint python-pyflakes
 
 .PHONY: python-pep8
 python-pep8:
-	$(python_files_run) pep8 --max-line-length 120
+	$(python_files_run) pep8 $(PEP8_OPTIONS)
 
 .PHONY: python-pychecker
 python-pychecker:
