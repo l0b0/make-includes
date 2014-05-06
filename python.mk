@@ -26,3 +26,6 @@ python-pylint:
 .PHONY: python-pyflakes
 python-pyflakes:
 	$(python_files_run) pyflakes
+
+virtualenv-$(PYTHON_VERSION):
+	virtualenv --python=$(shell which python$(PYTHON_VERSION)) virtualenv-$(PYTHON_VERSION)
