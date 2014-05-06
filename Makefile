@@ -9,8 +9,8 @@ test-python: test-python-lint test-python-virtualenv
 .PHONY: test-python-lint
 test-python-lint: clean
 	make python-lint
-	METHOD=find make python-lint
-	METHOD=git make python-lint
+	make METHOD=find python-lint
+	make METHOD=git python-lint
 
 .PHONY: test-python-virtualenv
 test-python-virtualenv:
