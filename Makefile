@@ -18,7 +18,7 @@ test-python-lint: clean
 
 .PHONY: test-python-virtualenv
 test-python-virtualenv:
-	make virtualenv-$(PYTHON_VERSION) || exit 1
+	make PYTHON_VERSION=$(PYTHON_VERSION) virtualenv
 	. virtualenv-$(PYTHON_VERSION)/bin/activate && python --version 2>&1 | grep -Fe "$(PYTHON_VERSION)"
 
 .PHONY: test-variables
