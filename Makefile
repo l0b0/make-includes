@@ -1,5 +1,3 @@
-PYTHON_VERSION ?= $(shell python --version | cut -d ' ' -f 2 | cut -d '.' -f 1-2)
-
 .PHONY: test
 test: test-posix-shell test-python test-variables
 
@@ -17,19 +15,27 @@ test-python-lint: clean
 	make METHOD=git python-lint
 
 .PHONY: test-python-virtualenv
-test-python-virtualenv:
-	make PYTHON_VERSION=$(PYTHON_VERSION) virtualenv
-	. virtualenv-$(PYTHON_VERSION)/bin/activate && python --version 2>&1 | grep -Fe "$(PYTHON_VERSION)"
+test-python-virtualenv: clean
+	for version in 2.6.9 3.4.1; do \
+		make PYTHON_VERSION=$$version virtualenv && \
+		. virtualenv-$$version/bin/activate && python --version 2>&1 | grep --fixed-strings --regexp=$$version || exit $?; \
+	done
+	if which python; then \
+		version=$(shell python --version | cut -d ' ' -f 2 | cut -d '.' -f 1-3) && \
+		make PYTHON_VERSION=$$version virtualenv && \
+		. virtualenv-$$version/bin/activate && python --version 2>&1 | grep --fixed-strings --regexp=$$version || exit $?; \
+	fi
 
 .PHONY: test-variables
 test-variables:
 	make variables | grep -q CURDIR
-	make FOO=bar variables | grep -Fq 'FOO = bar'
-	make FOO=bar variable-FOO | grep -Fq 'FOO = bar'
+	make FOO=bar variables | grep --fixed-strings --quiet 'FOO = bar'
+	make FOO=bar variable-FOO | grep --fixed-strings --quiet 'FOO = bar'
 
 .PHONY: clean
 clean:
-	-rm test/*.pyc
-	-rm -r virtualenv-*/
+	-rm --force --recursive build/
+	-rm --force test/*.pyc
+	-rm --force --recursive virtualenv-*/
 
 include *.mk

@@ -13,8 +13,8 @@ Overrides
 
 - `python` version:
 
-        make PYTHON_VERSION='2.7' test
-        make PYTHON_VERSION='2.7' virtualenv
+        make PYTHON_VERSION='2.7.8' test
+        make PYTHON_VERSION='2.7.8' virtualenv
 - `pep8` options:
 
         make PEP8_OPTIONS='--max-line-length=120' python-pep8
