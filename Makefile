@@ -1,4 +1,4 @@
-PYTHON_VERSION=$(shell python --version | cut -d ' ' -f 2 | cut -d '.' -f 1-2)
+PYTHON_VERSION ?= $(shell python --version | cut -d ' ' -f 2 | cut -d '.' -f 1-2)
 
 .PHONY: test
 test: test-posix-shell test-python test-variables
