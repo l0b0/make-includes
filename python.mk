@@ -35,7 +35,6 @@ python_version_patch = $(word 3,$(python_version_numbers))
 python_short_version = $(python_version_major).$(python_version_minor)
 
 VIRTUALENV_BUILD_DIRECTORY ?= $(PYTHON_BUILD_DIRECTORY)/virtualenv
-virtualenv_activate = $(VIRTUALENV_DIRECTORY)/bin/activate
 
 .PHONY: python-pep8
 python-pep8:
