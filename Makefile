@@ -6,13 +6,13 @@ test-posix-shell:
 	make posix-shell-test-syntax
 
 .PHONY: test-python
-test-python: test-python-lint test-python-virtualenv
+test-python: test-python-pep8 test-python-virtualenv
 
-.PHONY: test-python-lint
-test-python-lint: clean-python
-	make python-lint
-	make METHOD=find python-lint
-	make METHOD=git python-lint
+.PHONY: test-python-pep8
+test-python-pep8:
+	make python-pep8
+	make METHOD=find python-pep8
+	make METHOD=git python-pep8
 
 .PHONY: test-python-virtualenv
 test-python-virtualenv: clean

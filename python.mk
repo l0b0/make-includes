@@ -37,25 +37,9 @@ python_short_version = $(python_version_major).$(python_version_minor)
 VIRTUALENV_BUILD_DIRECTORY ?= build/virtualenv
 virtualenv_activate = $(VIRTUALENV_DIRECTORY)/bin/activate
 
-# Check Python code for all sorts of lint
-.PHONY: python-lint
-python-lint: python-pep8 python-pychecker python-pylint python-pyflakes
-
 .PHONY: python-pep8
 python-pep8:
 	$(python_files_run) pep8 $(PEP8_OPTIONS)
-
-.PHONY: python-pychecker
-python-pychecker:
-	$(python_files_run) pychecker
-
-.PHONY: python-pylint
-python-pylint:
-	$(python_files_run) pylint
-
-.PHONY: python-pyflakes
-python-pyflakes:
-	$(python_files_run) pyflakes
 
 $(PYTHON_TARBALL_PATH): $(PYTHON_BUILD_DIRECTORY)
 	wget --timestamp --directory-prefix $(PYTHON_BUILD_DIRECTORY) $(PYTHON_DOWNLOAD_URL)
