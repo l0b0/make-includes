@@ -84,7 +84,7 @@ $(VIRTUALENV_DIRECTORY): $(PYTHON_EXECUTABLE) $(VIRTUALENV_EXECUTABLE)
 
 .PHONY: virtualenv
 virtualenv: $(VIRTUALENV_DIRECTORY)
-	ln -fs $(VIRTUALENV_DIRECTORY) virtualenv
+	ln -fns $(VIRTUALENV_DIRECTORY) virtualenv
 
 .PHONY: clean-python
 clean-python:
