@@ -20,11 +20,6 @@ test-python-virtualenv: clean
 		make PYTHON_VERSION=$$version virtualenv && \
 		. virtualenv-$$version/bin/activate && python --version 2>&1 | grep --fixed-strings --regexp=$$version || exit $?; \
 	done
-	if which python; then \
-		version=$(shell python --version | cut -d ' ' -f 2 | cut -d '.' -f 1-3) && \
-		make PYTHON_VERSION=$$version virtualenv && \
-		. virtualenv-$$version/bin/activate && python --version 2>&1 | grep --fixed-strings --regexp=$$version || exit $?; \
-	fi
 
 .PHONY: test-variables
 test-variables:
