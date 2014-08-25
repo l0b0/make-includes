@@ -9,7 +9,7 @@ test-posix-shell:
 test-python: test-python-lint test-python-virtualenv
 
 .PHONY: test-python-lint
-test-python-lint: clean
+test-python-lint: clean-python
 	make python-lint
 	make METHOD=find python-lint
 	make METHOD=git python-lint
