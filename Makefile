@@ -39,7 +39,6 @@ test-variables:
 
 .PHONY: clean
 clean:
-	-$(RM) test/*.pyc
 	-$(RM) virtualenv
 
 include *.mk
