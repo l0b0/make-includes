@@ -87,8 +87,15 @@ virtualenv: $(VIRTUALENV_DIRECTORY)
 	ln -fns $(VIRTUALENV_DIRECTORY) virtualenv
 
 .PHONY: clean-python
-clean-python:
-	$(RM) -r $(PYTHON_BUILD_DIRECTORY) $(VIRTUALENV_DIRECTORY)
+clean-python: clean-python-build clean-python-virtualenv
+
+.PHONY: clean-python-build
+clean-python-build:
+	$(RM) -r $(PYTHON_BUILD_DIRECTORY)
+
+.PHONY: clean-python-virtualenv
+clean-python-virtualenv:
+	$(RM) -r $(VIRTUALENV_DIRECTORY) virtualenv
 
 $(PYTHON_BUILD_DIRECTORY) $(VIRTUALENV_BUILD_DIRECTORY):
 	mkdir --parent $@
