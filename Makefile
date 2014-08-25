@@ -34,8 +34,8 @@ test-variables:
 
 .PHONY: clean
 clean:
-	-rm --force --recursive build/
-	-rm --force test/*.pyc
-	-rm --force --recursive virtualenv-*/
+	-$(RM) -r build/
+	-$(RM) test/*.pyc
+	-$(RM) -r virtualenv-*/
 
 include *.mk

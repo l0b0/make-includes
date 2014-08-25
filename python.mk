@@ -88,7 +88,7 @@ virtualenv: $(VIRTUALENV_DIRECTORY)
 
 .PHONY: clean-python
 clean-python:
-	rm --recursive --force $(python_build_directory) $(VIRTUALENV_DIRECTORY)
+	$(RM) -r $(python_build_directory) $(VIRTUALENV_DIRECTORY)
 
 $(python_build_directory) $(virtualenv_build_directory):
 	mkdir --parent $@
