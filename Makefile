@@ -33,6 +33,12 @@ test-python-virtualenv:
 			python --version 2>&1 | $(GREP) --fixed-strings --regexp=$$version || \
 			exit $$?; \
 	done
+	$(RM) -r $(TEMPORARY_DIRECTORY)/virtualenv-3.4.1
+	$(MAKE) ONLINE=false PYTHON_VERSION=3.4.1 PYTHON_BUILD_DIRECTORY=$(TEMPORARY_DIRECTORY) virtualenv && \
+		. virtualenv/bin/activate && \
+		python --version 2>&1 | $(GREP) --fixed-strings --regexp=$$version || \
+		exit $$?;
+
 
 .PHONY: test-variables
 test-variables:

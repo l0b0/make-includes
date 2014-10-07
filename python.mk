@@ -1,3 +1,11 @@
+# Set to false to skip all download steps
+ONLINE = true
+ifeq ($(ONLINE),true)
+	WGET_OPTIONS = --timestamp
+else
+	WGET_OPTIONS = --no-clobber
+endif
+
 FIND = /usr/bin/find
 GIT = /usr/bin/git
 LN = /usr/bin/ln
@@ -6,7 +14,7 @@ MKDIR = /usr/bin/mkdir
 PYTHON = /usr/bin/python
 TAR = /usr/bin/tar
 VIRTUALENV = /usr/bin/virtualenv
-WGET = /usr/bin/wget
+WGET = /usr/bin/wget $(WGET_OPTIONS)
 XARGS = /usr/bin/xargs
 
 # Use METHOD=git to check only files in the Git index or working tree
@@ -52,7 +60,7 @@ python-pep8:
 	$(python_files_run) pep8 $(PEP8_OPTIONS)
 
 $(PYTHON_TARBALL_PATH): $(PYTHON_BUILD_DIRECTORY)
-	$(WGET) --timestamp --directory-prefix $(PYTHON_BUILD_DIRECTORY) $(PYTHON_DOWNLOAD_URL)
+	$(WGET) --directory-prefix $(PYTHON_BUILD_DIRECTORY) $(PYTHON_DOWNLOAD_URL)
 
 # Two targets in one to work around 1-second resolution on Make timestamps
 $(PYTHON_MAKEFILE): $(PYTHON_TARBALL_PATH)
@@ -66,7 +74,7 @@ $(PYTHON_EXECUTABLE): $(PYTHON_SOURCE_EXECUTABLE)
 	$(MAKE) -C $(PYTHON_SOURCE_DIRECTORY) install
 
 $(VIRTUALENV_TARBALL_PATH): $(VIRTUALENV_BUILD_DIRECTORY)
-	$(WGET) --timestamp --directory-prefix $(VIRTUALENV_BUILD_DIRECTORY) $(VIRTUALENV_DOWNLOAD_URL)
+	$(WGET) --directory-prefix $(VIRTUALENV_BUILD_DIRECTORY) $(VIRTUALENV_DOWNLOAD_URL)
 
 $(VIRTUALENV_SOURCE_DIRECTORY): $(VIRTUALENV_TARBALL_PATH)
 	$(TAR) --extract --gzip --directory $(dir $(VIRTUALENV_TARBALL_PATH)) --file $(VIRTUALENV_TARBALL_PATH)
