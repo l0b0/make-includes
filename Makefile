@@ -3,6 +3,8 @@ MAKE = /usr/bin/make
 
 TEMPORARY_DIRECTORY := $(shell mktemp -d)
 
+VIRTUALENV_VERSION = 13.1.2
+
 .PHONY: test
 test: test-posix-shell test-python test-variables
 
