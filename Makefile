@@ -29,11 +29,13 @@ test-python-pep8:
 
 .PHONY: test-python-virtualenv
 test-python-virtualenv:
-	for version in 2.6.9 3.4.1; do \
-		$(MAKE) PYTHON_VERSION=$$version PYTHON_BUILD_DIRECTORY=$(TEMPORARY_DIRECTORY) virtualenv && \
-			. virtualenv/bin/activate && \
-			python --version 2>&1 | $(GREP) --fixed-strings --regexp=$$version || \
-			exit $$?; \
+	for python_version in 2.6.9 3.4.1; do \
+		for virtualenv_version in 12.1.1 13.1.2; do \
+			$(MAKE) PYTHON_VERSION=$$python_version PYTHON_BUILD_DIRECTORY=$(TEMPORARY_DIRECTORY) VIRTUALENV_VERSION=$$virtualenv_version virtualenv && \
+				. virtualenv/bin/activate && \
+				python --version 2>&1 | $(GREP) --fixed-strings --regexp=$$version || \
+				exit $$?; \
+		done \
 	done
 	$(RM) -r $(TEMPORARY_DIRECTORY)/virtualenv-3.4.1
 	$(MAKE) ONLINE=false PYTHON_VERSION=3.4.1 PYTHON_BUILD_DIRECTORY=$(TEMPORARY_DIRECTORY) virtualenv && \
