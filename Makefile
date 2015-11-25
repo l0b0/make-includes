@@ -52,6 +52,7 @@ test-variables:
 
 .PHONY: clean
 clean:
+	-$(RM) build
 	-$(RM) virtualenv
 
 include *.mk
