@@ -29,7 +29,7 @@ test-python-pep8:
 
 .PHONY: test-python-virtualenv
 test-python-virtualenv:
-	for python_version in 2.6.9 3.4.1; do \
+	for python_version in 2.7.10 3.5.0; do \
 		for virtualenv_version in 12.1.1 13.1.2; do \
 			$(MAKE) PYTHON_VERSION=$$python_version PYTHON_BUILD_DIRECTORY=$(TEMPORARY_DIRECTORY) VIRTUALENV_VERSION=$$virtualenv_version virtualenv && \
 				. virtualenv/bin/activate && \
