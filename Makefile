@@ -9,8 +9,7 @@ VENV_VERSION = 13.1.2
 test: test-posix-shell test-python test-variables
 
 .PHONY: test-posix-shell
-test-posix-shell:
-	$(MAKE) posix-shell-test-syntax
+test-posix-shell: posix-shell-test-syntax
 
 .PHONY: test-python
 test-python: test-python-pep8 test-python-virtualenv
