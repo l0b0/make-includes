@@ -7,6 +7,13 @@ VENV_VERSION = 13.1.2
 
 .PHONY: test
 test: test-posix-shell test-python test-variables
+	$(MAKE) test-post-build
+
+.PHONY: test-post-build
+test-post-build: test-post-build-clean
+
+.PHONY: test-post-build-clean
+test-post-build-clean: test-clean
 
 .PHONY: test-posix-shell
 test-posix-shell: posix-shell-test-syntax
