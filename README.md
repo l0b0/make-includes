@@ -1,6 +1,8 @@
 make-includes
 =============
 
+[![Build Status](https://travis-ci.org/l0b0/make-includes.svg)](https://travis-ci.org/l0b0/make-includes)
+
 Files used by Makefiles in several other projects.
 
 Test
