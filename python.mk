@@ -6,6 +6,8 @@ else
 	WGET_OPTIONS = --no-clobber
 endif
 
+BUILD_DIRECTORY ?= build
+
 FIND = /usr/bin/find
 GIT = /usr/bin/git
 LN = /usr/bin/ln
@@ -46,7 +48,7 @@ VENV_EXECUTABLE ?= $(VENV_SOURCE_DIRECTORY)/virtualenv.py
 
 VENV_DIRECTORY ?= $(PYTHON_BUILD_DIRECTORY)/virtualenv-$(PYTHON_VERSION)
 
-PYTHON_BUILD_DIRECTORY ?= build/python
+PYTHON_BUILD_DIRECTORY ?= $(BUILD_DIRECTORY)/python
 python_version_numbers = $(wordlist 1,3,$(subst ., ,$(PYTHON_VERSION)))
 python_version_major = $(word 1,$(python_version_numbers))
 python_version_minor = $(word 2,$(python_version_numbers))
