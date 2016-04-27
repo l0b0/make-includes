@@ -1,9 +1,17 @@
+CP = /usr/bin/cp
+DIFF = /usr/bin/diff
 GREP = /usr/bin/grep
 MAKE = /usr/bin/make
+PRINTF = /usr/bin/printf
 
 TEMPORARY_DIRECTORY := $(shell mktemp -d)
 
 VENV_VERSION = 13.1.2
+
+test_directory = test
+xml_test_template = $(test_directory)/test.xml.orig
+xml_test_file = $(test_directory)/test.xml
+expected_xml_result_file = $(test_directory)/result.xml.test
 
 .PHONY: test
 test: test-posix-shell test-python test-variables
@@ -56,9 +64,16 @@ test-variables:
 	$(MAKE) FOO=bar variables | $(GREP) --fixed-strings --quiet 'FOO = bar'
 	$(MAKE) FOO=bar variable-FOO | $(GREP) --fixed-strings --quiet 'FOO = bar'
 
+.PHONY: test-xml
+test-xml:
+	$(CP) $(xml_test_template) $(xml_test_file)
+	$(MAKE) METHOD=find sort-xml-files
+	$(DIFF) $(xml_test_file) $(expected_xml_result_file)
+
 .PHONY: clean
 clean:
 	-$(RM) build
 	-$(RM) virtualenv
+	-$(RM) $(xml_test_file)
 
 include *.mk
