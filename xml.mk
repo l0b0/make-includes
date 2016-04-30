@@ -6,6 +6,8 @@ PRINTF = /usr/bin/printf
 XARGS = /usr/bin/xargs
 XSLTPROC = /usr/bin/xsltproc
 
+sort_file := $(dir $(lastword $(MAKEFILE_LIST)))sort.xslt
+
 METHOD = find
 ifeq ($(METHOD),git)
 	XML_FILES_COMMAND ?= $(GIT) ls-files -z '*.xml'
@@ -15,4 +17,4 @@ endif
 
 .PHONY: sort-xml-files
 sort-xml-files:
-	$(XML_FILES_COMMAND) | $(XARGS) --null -I '{}' $(XSLTPROC) --output '{}' sort.xslt '{}'
+	$(XML_FILES_COMMAND) | $(XARGS) --null -I '{}' $(XSLTPROC) --output '{}' $(sort_file) '{}'
