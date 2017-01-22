@@ -1,2 +1,8 @@
-language: shell
-script: make GREP=/bin/grep LN=/bin/ln MKDIR=/bin/mkdir PYTHON_VERSION=3.5.0 SH=/bin/sh TAR=/bin/tar test
+language: python
+python:
+  - "2.7"
+  - "3.6"
+  - "3.6-dev"
+  - "3.7-dev"
+  - "nightly"
+script: make GREP=/bin/grep LN=/bin/ln MKDIR=/bin/mkdir PYTHON_VERSION=3.6.0 SH=/bin/sh TAR=/bin/tar test

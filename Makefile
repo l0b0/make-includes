@@ -6,7 +6,7 @@ PRINTF = /usr/bin/printf
 
 TEMPORARY_DIRECTORY := $(shell mktemp -d)
 
-VENV_VERSION = 13.1.2
+VENV_VERSION = 15.1.0
 
 test_directory = test
 xml_test_template = $(test_directory)/test.xml.orig
@@ -43,8 +43,8 @@ test-python-pep8:
 
 .PHONY: test-python-virtualenv
 test-python-virtualenv:
-	for python_version in 2.7.10 3.5.0; do \
-		for virtualenv_version in 12.1.1 13.1.2; do \
+	for python_version in 2.7.13 3.6.0; do \
+		for virtualenv_version in 12.1.1 13.1.2 14.0.6 15.1.0; do \
 			$(MAKE) PYTHON_VERSION=$$python_version PYTHON_BUILD_DIRECTORY=$(TEMPORARY_DIRECTORY) VENV_VERSION=$$virtualenv_version virtualenv && \
 				. virtualenv/bin/activate && \
 				python --version 2>&1 | $(GREP) --fixed-strings --regexp=$$version || \
@@ -52,7 +52,7 @@ test-python-virtualenv:
 		done \
 	done
 	$(RM) -r $(TEMPORARY_DIRECTORY)/virtualenv-3.4.1
-	$(MAKE) ONLINE=false PYTHON_VERSION=3.4.1 PYTHON_BUILD_DIRECTORY=$(TEMPORARY_DIRECTORY) virtualenv && \
+	$(MAKE) ONLINE=false PYTHON_VERSION=3.6.0 PYTHON_BUILD_DIRECTORY=$(TEMPORARY_DIRECTORY) virtualenv && \
 		. virtualenv/bin/activate && \
 		python --version 2>&1 | $(GREP) --fixed-strings --regexp=$$version || \
 		exit $$?;
