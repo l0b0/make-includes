@@ -43,7 +43,7 @@ VENV_NAME ?= virtualenv-$(VENV_VERSION)
 VENV_SOURCE_DIRECTORY ?= $(VENV_BUILD_DIRECTORY)/$(VENV_NAME)
 VENV_TARBALL ?= $(VENV_NAME).tar.gz
 VENV_TARBALL_PATH ?= $(VENV_BUILD_DIRECTORY)/$(VENV_TARBALL)
-VENV_DOWNLOAD_URL ?= https://pypi.python.org/packages/source/v/virtualenv/$(VENV_TARBALL)
+VENV_DOWNLOAD_URL ?= https://pypi.io/packages/source/v/virtualenv/$(VENV_TARBALL)
 VENV_EXECUTABLE ?= $(VENV_SOURCE_DIRECTORY)/virtualenv.py
 
 VENV_DIRECTORY ?= $(PYTHON_BUILD_DIRECTORY)/virtualenv-$(PYTHON_VERSION)
