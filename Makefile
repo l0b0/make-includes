@@ -47,7 +47,8 @@ test-python-virtualenv:
 		for virtualenv_version in 12.1.1 13.1.2 14.0.6 15.1.0; do \
 			$(MAKE) PYTHON_VERSION=$$python_version PYTHON_BUILD_DIRECTORY=$(TEMPORARY_DIRECTORY) VENV_VERSION=$$virtualenv_version virtualenv && \
 				. virtualenv/bin/activate && \
-				python --version 2>&1 | $(GREP) --fixed-strings --regexp=$$version || \
+				python --version 2>&1 | $(GREP) --fixed-strings --regexp=$$version && \
+				deactivate || \
 				exit $$?; \
 		done \
 	done
