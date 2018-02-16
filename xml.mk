@@ -5,14 +5,20 @@ GIT = /usr/bin/git
 PRINTF = /usr/bin/printf
 XARGS = /usr/bin/xargs
 XSLTPROC = /usr/bin/xsltproc
+XML_EXTENSIONS ?= xml
 
 sort_file := $(dir $(lastword $(MAKEFILE_LIST)))sort.xslt
 
+xml_glob_list = $(addprefix *., $(XML_EXTENSIONS))
+empty :=
+space := $(empty) $(empty)
+
 METHOD = find
 ifeq ($(METHOD),git)
-	XML_FILES_COMMAND ?= $(GIT) ls-files -z '*.xml'
+	XML_FILES_COMMAND ?= $(GIT) ls-files -z $(xml_glob_list)
 else ifeq ($(METHOD),find)
-	XML_FILES_COMMAND ?= $(FIND) . -type f -name '*.xml' -exec $(PRINTF) '%s\0' {} +
+	xml_names_list = $(subst $(space), -o -name ,$(xml_glob_list))
+	XML_FILES_COMMAND ?= $(FIND) . -type f \( -name $(xml_names_list) \) -exec $(PRINTF) '%s\0' {} +
 endif
 
 .PHONY: sort-xml-files
