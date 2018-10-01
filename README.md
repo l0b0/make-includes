@@ -1,4 +1,4 @@
-# [make-includes](https://github.com/l0b0/make-includes)
+# [make-includes](https://gitlab.com/victor-engmark/make-includes/)
 
 [![Build Status](https://travis-ci.org/l0b0/make-includes.svg)](https://travis-ci.org/l0b0/make-includes)
 
